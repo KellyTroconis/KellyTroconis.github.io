@@ -1,11 +1,44 @@
 ---
-title: "Untitled"
-author: "Cook"
-date: "3/10/2020"
+title: "Kelly Cook GitWeb"
 output: html_document
 ---
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 
-# Kelly Cook
-#### First website from github!
+<style>
+div.gray { background-color:#5594A0; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "gray">
 
 
+
+<style>
+div.blue { background-color:#FFE0D1; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+## [HOME](http://KellyTroconis.github.io/) | [ABOUT ME](http://KellyTroconis.github.io/About-me/) | [DATA COURSE](http://KellyTroconis.github.io/data-course/) | [PROJECT](http://KellyTroconis.github.io/PROJECT/)
+
+# **Kelly Cook GitWeb - Utah Valley University**
+
+<br><br><br><br><br><br><br><br><br>
+<br><br><br>
+
+</div>
+
+___
+
+
+## **Contact Info:**
+
+### Kelly Cook<br>
+### 10869852@my.uvu.edu
+
+<br><br><br>
+
+</div>
