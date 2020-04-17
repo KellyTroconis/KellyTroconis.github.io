@@ -2,7 +2,7 @@
 output: 
 html_document:
 code_folding: hide
-pagetitle: Kelly Cook Home
+pagetitle: Assignments
 ---
 
 <style type="text/css">
@@ -26,17 +26,5 @@ div.blue { background-color:#FFE0D1; border-radius: 5px; padding: 20px;}
 <div class = "blue">
 
 ## [HOME](http://KellyTroconis.github.io/) | [ABOUT ME](http://KellyTroconis.github.io/About-me/) | [DATA COURSE](http://KellyTroconis.github.io/data-course/) | [PROJECT](http://KellyTroconis.github.io/PROJECT/)
-
-## **Troconis-Cook  - Utah Valley University**
 <br>
-</div>
-___
-### **Contact Info:**
-
-### Kelly Cook
-#### 10869852@my.uvu.edu
-#### kellycook523@gmail.com
-
-<br><br><br>
-
 </div>
