@@ -1,9 +1,19 @@
 ---
-title: "A9"
+title: "Assignment 9"
 author: "Cook"
-date: "4/17/2020"
 output: html_document
 ---
+</style>
+
+<style>
+div.gray { background-color:#9CD3A9; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "gray">
+
+<style>
+div.blue { background-color:#BCE1D9; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 ```{r setup chunk, setup, warning=FALSE, message=FALSE, fig.align='center', include=FALSE}
 require("knitr")
@@ -126,4 +136,6 @@ new1
 ```
 Student with lowest gpa but highest gre has a 35% to be admitted. 
 
+<br>
 
+</div>
