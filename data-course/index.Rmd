@@ -20,16 +20,12 @@ div.gray { background-color:#5594A0; border-radius: 5px; padding: 20px;}
 
 
 <style>
-div.blue { background-color:#FFE0D1; border-radius: 5px; padding: 20px;}
+div.blue { background-color:#61A4B7; border-radius: 5px; padding: 20px;}
 </style>
 <div class = "blue">
 ## [HOME](http://KellyTroconis.github.io/) | [ABOUT ME](http://KellyTroconis.github.io/About-me/) | [DATA COURSE](http://KellyTroconis.github.io/data-course/) | [PROJECT](http://KellyTroconis.github.io/PROJECT/)
-
-<br>
 </div>
 ___
-
-
 ## **Data Analysis UVU**
 
 ###### This page contains assigments made with R Marckdown. The goal of the assigments is to improve our html document skills...blablablabalbalabla.... need to write something coherent. 
@@ -37,10 +33,9 @@ ___
 </div>
 ___
 <style>
-div.gray { background-color:#5594A0; border-radius: 5px; padding: 20px;}
+div.green { background-color:#9CD3A9; border-radius: 5px; padding: 20px;}
 </style>
-<div class = "gray">
-
+<div class = "green">
 #### **Assignment 9** [Grad schools Admissions](http://KellyTroconis.github.io/data-course/Assignment_9.html)
 
 **In this assignment, you will use R (within R-Studio) to:**
@@ -50,7 +45,24 @@ div.gray { background-color:#5594A0; border-radius: 5px; padding: 20px;}
   - Build and test appropriate models.
   - Draw conclusions about your data.
   - Combine all of the above into a well-documented R-Markdown report and export (knit) it into an HTML file.
+</div>
+
+___
+<style>
+div.gray { background-color:#5594A0; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "gray">
+
+#### **Exam 3** [Exam 3](http://KellyTroconis.github.io/data-course/Exam_3.html)
+
+**Model Building and Testing**
+
+  - Workflow 
+  - R-mtcar.
 
 <br>
 
 </div>
+
+___
+

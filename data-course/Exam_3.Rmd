@@ -1,0 +1,207 @@
+---
+title: 
+author: 
+output: html_document
+---
+
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<style>
+div.gray { background-color:#5594A0; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "gray">
+
+<style>
+div.blue { background-color:#BCE1D9; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+```{r setup chunk, setup, warning=FALSE, message=FALSE, fig.align='center', include=FALSE}
+require("knitr")
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, fig.align='center', echo = TRUE)
+```
+
+#### Exam 3 Data Analysis
+##### Kelly Cook
+
+#### Model Building and Testing 
+**Workflow demostration using one of the built-in R datasets called mtcar.**
+
+***
+***
+
+### Load Libraries
+- library(pacman) "*pacman conveniently wraps library and package related functions and names them in an intuitive and consistent fashion. It seeks to combine functionality from lower level functions which can speed up workflow.*"
+```{r message=FALSE,warning=FALSE,echo=TRUE}
+library(pacman)
+pacman::p_load("tidyverse", "modelr", "GGally", "patchwork", "lindia", "corrplot", "skimr", "caret")
+```
+
+### Load the data. 
+```{r}
+data("mtcars")
+```
+
+### Becomoing familiar with the data
+```{r message=FALSE,warning=FALSE,echo=TRUE}
+help(mtcars)
+```
+- help() will display the data set description. 
+*Description*
+*The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models)...* 
+
+- names() displays the names of the data's variables.
+```{r warning=FALSE,echo=TRUE}
+names(mtcars)
+```
+
+### Exploting the data
+- Correlations of variables. using ggpairs() we optain a quick visual of our variables. 
+```{r Map fig1, results="hide", message=FALSE, warning=FALSE,fig.align = 'center', fig.cap="**Figure 1a.** *Comparing the variables of the data set*"}
+ggpairs(mtcars)
+```
+
+### Correlation values 
+- This will help us determine with which variables we want to test. 
+
+```{r message=FALSE,warning=FALSE,echo=TRUE}
+df <- cor(mtcars)
+sort(df[1,])
+```
+I am going to use mgp as my depend variable. Most the negative correlation values seem very strong, while the positive correlations weak. Therefore, I will test wt, disp and cyl to test them in a model. 
+
+```{r Map fig2, results="hide", message=FALSE, warning=FALSE,fig.align = 'center', fig.cap="**Figure 1b.** *Comparing the variables of the data set. Different from Fig1a, this graph shows the correlation in a color gradient. Helping with a better visual*"}
+corrplot.mixed(df)
+```
+***
+
+### Making our models
+
+#### clean data 
+- Now that we determined we will use cyl in our models. It needs to be changed from numeric to factor. 
+```{r message=FALSE, warning=FALSE, results='hide'}
+mtcars$cyl<-as.factor(mtcars$cyl)
+```
+
+#### Models
+- I will be using linear regression for this models. We want to know which would be a better predicter for mpg
+```{r message=FALSE}
+mod1 <- lm(data=mtcars, formula = mpg ~ wt * cyl)
+mod2 <- lm(data=mtcars, formula = mpg ~ disp * cyl)
+```
+
+### Deretmining which is a better model
+
+- We can determine which model in varius ways.
+
+- R-squared will tell us how much our model explains our varience. 
+```{r message=FALSE}
+su1<- summary((mod1))$r.squared
+su2 <- summary((mod2))$r.squared
+su1 ; su2 
+```
+The mod1 explains 86% of the varience while mod2 explains 87%. Making the mod2 slightly more accurrate.
+
+- Another way is by the mean of R-squared. This would provided the best fit line. The smaller the number the better our model.  
+```{r message=FALSE}
+mod1mse <- mean(residuals(mod1)^2)
+mod2mse <- mean(residuals(mod2)^2)
+mod1mse ; mod2mse 
+```
+Both test indicates that mod2 is a better model. 
+
+
+### Adding predictions 
+
+- Now that we determine that mod2 has a better fit. We will use this model to make our predictions 
+```{r message=FALSE, warning=FALSE, results='hide'}
+mod2p <- add_predictions(mtcars, mod2)
+```
+
+
+### Ploting our predictions 
+
+```{r fig3, message=FALSE, warning=FALSE, fig.align = 'center', fig.cap="**Figure2.** *mpg predictions in base of dispa and each cyl type. Using predictions from mod2. lines in the graph represents the mpg predictions*"}
+g1 <- ggplot(mod2p, aes(x=disp,color=cyl)) +
+  geom_point(aes(y=mpg)) +
+  stat_smooth(method="lm", aes(y=pred))
+g1
+```
+
+- Keeping in mind this is a fake version of reality. In the plot we can see that our mod2 works better prediccting cyl=4 than cyl=5.
+
+***
+### Cross-validation 
+##### Is the model I have created good as a system or just for the data set?
+- First create radom set of numbers. 
+- Then place the ramdon set numbers within the mtcars data set. 
+- p= indicates how many ramdon set of numbers will be replace. I will use p=.5 which means 50% of random points. 
+```{r}
+set.seed(123)
+set <- caret::createDataPartition(mtcars$mpg, p=.5)
+set <- set$Resample1
+
+train <- mtcars[set,]
+test <- mtcars[-set,]
+```
+
+
+- Using our mod2 with our new data. 
+- Just as we did with our first models. We want to know how good is our model behaves with our train model. 
+- R-squared and Its mean
+```{r}
+formula(mod2)
+mod2_cv <- lm(data=train, formula = formula(mod2))
+r <- summary((mod2_cv))$r.squared
+m <- mod2_cv_mse <- mean(residuals(mod2_cv)^2)
+r ; m
+```
+The model still looks good. It explains 93% of the varience, and its mean is 2.22
+
+- add predictions to our model once again
+- Test trained model on unused other half of data set
+```{r}
+carstest <- add_predictions(test,mod2_cv)
+```
+
+- We can make a new plot to visualize our model. However, we still need to compare this model with the original. 
+```{r fig4, message=FALSE, warning=FALSE,fig.align = 'center', fig.cap="**Figure3a.** *mpg predictions with Cross-validation model values.*"}
+cvp <- ggplot(carstest,aes(x=disp,color=cyl)) +
+  geom_point(aes(y=mpg),alpha=.8) +
+  geom_point(aes(y=pred),shape=5)
+cvp
+```
+
+***
+
+### Cross-validation Results
+
+- Compare the redual means of our original model and the over-fitted model
+```{r}
+testedresiduals <- (carstest$pred - carstest$disp - carstest$cyl )
+testrMes <- mean(testedresiduals^2)
+mod2mse ; testrMes
+```
+
+- Create new predictions for all of our data sets.
+```{r}
+df2 <- gather_predictions(mtcars, mod2,mod2_cv)
+```
+
+- Make final graph
+```{r fig5, message=FALSE, warning=FALSE,fig.align = 'center', fig.cap="**Figure4.** *mpg predictions from mod2 and mod2_cv.*"}
+p3 <- ggplot(df2, aes(x=disp,color=cyl)) +
+  geom_point(aes(y=mpg),alpha=.2) +
+  geom_smooth(method = "lm", aes(linetype=model,y=pred)) + theme_bw()
+p3
+```
+This proves that mod2 is not necessarly the best model. I does a good job at predicting the varience of cyl=4, but very poorly at predicting with type 6 and 8. 
+
+
+
