@@ -182,9 +182,9 @@ cvp
 
 ### Cross-validation Results
 
-- Compare the redual means of our original model and the over-fitted model
+- Compare the residual means of our original model and the over-fitted model
 ```{r}
-testedresiduals <- (carstest$pred - carstest$disp - carstest$cyl )
+testedresiduals <- (carstest$pred - carstest$disp * carstest$cyl )
 testrMes <- mean(testedresiduals^2)
 mod2mse ; testrMes
 ```
@@ -201,7 +201,7 @@ p3 <- ggplot(df2, aes(x=disp,color=cyl)) +
   geom_smooth(method = "lm", aes(linetype=model,y=pred)) + theme_bw()
 p3
 ```
-This proves that mod2 is not necessarly the best model. I does a good job at predicting the varience of cyl=4, but very poorly at predicting with type 6 and 8. 
+This proves that mod2 is not necessarly the best model. It does a good job at predicting the varience of cyl=4, but very poorly at predicting with type 6 and 8. 
 
 
 
