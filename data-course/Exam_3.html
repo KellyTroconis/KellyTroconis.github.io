@@ -573,11 +573,13 @@ cvp</code></pre>
 <ul>
 <li>Compare the residual means of our original model and the over-fitted model</li>
 </ul>
-<pre class="r"><code>testedresiduals &lt;- (carstest$pred - carstest$disp * carstest$cyl )
-testrMes &lt;- mean(testedresiduals^2)
-mod2mse ; testrMes</code></pre>
+<pre class="r"><code>Compare &lt;- mtcars %&gt;% gather_residuals(mod2, mod2_cv)
+mod2mse &lt;- mean(residuals(mod2)^2)
+m &lt;- mod2_cv_mse &lt;- mean(residuals(mod2_cv)^2)
+mod2mse ; m </code></pre>
 <pre><code>## [1] 4.569821</code></pre>
-<pre><code>## [1] NA</code></pre>
+<pre><code>## [1] 2.222221</code></pre>
+<p>The over-fitted model residual seems to be better. However, we need to remember that it is over-fitted, we still need to compare it to reality.</p>
 <ul>
 <li>Create new predictions for all of our data sets.</li>
 </ul>
@@ -595,7 +597,7 @@ p3</code></pre>
 <strong>Figure4.</strong> <em>mpg predictions from mod2 and mod2_cv.</em>
 </p>
 </div>
-<p>This proves that mod2 is not necessarly the best model. It does a good job at predicting the varience of cyl=4, but very poorly at predicting with type 6 and 8.</p>
+<p>This proves that mod2 is not necessarly the best model. It does a good job at predicting the varience of cyl=4, but very poorly at predicting type 6 and 8. It can also be observed that the over-fitted model (mod2_cv) did slightly better over all.</p>
 </div>
 
 
