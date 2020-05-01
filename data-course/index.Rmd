@@ -28,7 +28,12 @@ div.blue { background-color:#61A4B7; border-radius: 5px; padding: 20px;}
 ___
 ## **Data Analysis UVU**
 
-###### This page contains assigments made with R Marckdown. The goal of the assigments is to improve our html document skills...blablablabalbalabla.... need to write something coherent. 
+#### This page contains assignments from the data entry class, made with R Markdown. The over all goal is to obtain the basic skills to clean and analyzed data with R. 
+
+#### This website is still a work in progress. I am looking forward to keep developing my data analysis skills. This website will be use to keep my progress updated.  
+
+##### Here is the link to my personal GitHub, which contains class notes and other assignments. (https://github.com/KellyTroconis/Data_Course_COOK) 
+
 <br>
 </div>
 ___
