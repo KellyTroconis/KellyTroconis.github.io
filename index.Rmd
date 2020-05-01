@@ -30,6 +30,11 @@ ___
 ## **Troconis-Cook  - Utah Valley University**
 <br>
 <br>
+<div style= "float:right;position: relative;top:20px">
+```{r, out.width = "250px",echo=FALSE}
+knitr::include_graphics("./Data_Files/Utah_Valley.png")
+```
+</div>
 
 ### **Contact Info:**
 
